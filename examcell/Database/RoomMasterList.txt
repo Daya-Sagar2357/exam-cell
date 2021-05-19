@@ -1,0 +1,10 @@
+
+ROOM DETAILS
+-------------------------------
+
+CREATE TABLE `room_details` (
+ `RoomNo` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+INSERT INTO `room_details` (`RoomNo`) VALUES ('101'),('102'),('103'),('104'),('201'),('202'), ('203'),('204');
