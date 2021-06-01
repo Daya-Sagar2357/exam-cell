@@ -14,5 +14,6 @@
             $array_name = $query->result();
 
 //$array_name[0]->ID
+            print_r($array_name[0]->ID);
         }
     }
