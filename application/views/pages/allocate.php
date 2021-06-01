@@ -11,7 +11,7 @@
     <title>Home</title>
   </head>
   <body>
-  <h1>
+  <h1 class = 'container'>
 		Seating Allocation
 	</h1>
     <div class='container pt-3'>
