@@ -19,10 +19,10 @@
   </div>
 </div>
 
-<form>
+<form  action="<?php echo base_url();?>get_started.php" method="post">
   <div style="width: 100%;height: auto;object-fit: cover; margin-top: 25px;" class="form-group">
     <label for="columnEdit">Edit number of columns</label>
-    <input type="text" class="form-control" id="columnEdit" placeholder="3">
+    <input type="text" name="column_count" class="form-control" id="columnEdit" placeholder="3">
   </div>
 </form>
 <form>

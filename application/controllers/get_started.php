@@ -8,7 +8,7 @@ class Get_started extends CI_Controller{
         // $this->load->view('pages/'.$page, $data);
         $db_obj = $this->load->database();
         $this->load->model('starter');
-        $data['h']=$this->starter->show_data();
+        $data['h']=$this->starter->seating();
         // echo $data;
         $this->load->view('pages/allocate', $data);
         // $this->load->view('pages/'.$page, $data);
@@ -23,7 +23,9 @@ class Get_started extends CI_Controller{
         $temp_data['title'] = ucfirst($page);
         $this->load->view('templates/header', $temp_data);
         $this->load->view('pages/edit');
+        
         $this->load->view('templates/footer', $temp_data);
+
     }
 
     public function templates($page = 'home'){
