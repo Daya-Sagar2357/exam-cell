@@ -280,7 +280,7 @@
                     $this->db->query('drop temporary table temptab');
                 }
             }
-            echo "<pre>";
-            print_r($MEGAMEGALIST);
+            // echo "<pre>";
+            // print_r($MEGAMEGALIST);
         }
     }
