@@ -1,0 +1,62 @@
+
+
+STORED PROCEDURE 1
+
+=================================================================================
+
+
+DELIMITER $$
+create procedure populatetab()
+begin
+ 
+create temporary table temptab (tmpid int not null AUTO_INCREMENT, PRIMARY KEY(tmpid)) select ExamDate, Session, Course, BranchName, count(StudentName) as 
+CountStud from semester_masterlist where ExamDate='2021-04-15' and Session='FN' group by ExamDate,BranchName,Course order by CountStud desc;
+
+
+create temporary table tableA (StudentName varchar(50), BranchName char(50), Course char(100), ExamDate date, Session enum('FN','AN'));
+create temporary table tableB (StudentName varchar(50), BranchName char(50), Course char(100), ExamDate date, Session enum('FN','AN'));
+ set @lrow_num = (select count(*) from temptab);
+ set @row_num=1;
+ while @row_num <= @lrow_num do
+     
+     set @xm_date=(select ExamDate from temptab Where tmpid like @row_num);
+     set @sess= (select Session from temptab where tmpid like @row_num);
+     set @br =(select BranchName from temptab where tmpid like @row_num);
+     set @sub=(select Course from temptab where tmpid like @row_num);
+     set @count =(select CountStud from temptab where tmpid like @row_num);
+     set @row_countA =(select count(*) from tableA);
+     set @row_countB=(select count(*) from tableB);
+
+     if @row_countA <= @row_countB then
+        insert into tableA (StudentName, BranchName, Course, ExamDate, Session) select  StudentName, BranchName, Course, ExamDate, Session from semester_masterlist 
+        where semester_masterlist.ExamDate = @xm_date and semester_masterlist.Session=@sess and   semester_masterlist.BranchName=@br and semester_masterlist.Course=@sub;
+     else
+        insert into tableB (StudentName, BranchName, Course, ExamDate, Session) select StudentName, BranchName, Course, ExamDate, Session from semester_masterlist 
+        where semester_masterlist.ExamDate= @xm_date and semester_masterlist.Session=@sess and semester_masterlist.BranchName=@br and semester_masterlist.Course=@sub;
+    end if;
+    set @row_num = @row_num + 1;
+ end while;
+SELECT * FROM tableA;
+SELECT * FROM tableB;
+end$$
+DELIMITER ;
+
+call populatetab();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
