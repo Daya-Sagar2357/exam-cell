@@ -10,7 +10,7 @@
 
     <title>Home</title>
   </head>
-  <body>
+  <body >
   <h1 class = 'container'>
 		Seating Allocation
 	</h1>
@@ -27,12 +27,79 @@
         <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
     </div>
     </div>
-		<input type="submit" name="submit_button"
-				class="button" value="Submit" />
+		<button id="submit_button" type="button" class="btn btn-primary">Submit</button>
+     <button id="generate_button" type="button" class="btn btn-primary">Generate</button>
+        
 	</form>
 </div>
+<pre>
+<p id = "submitted_prompt"></p>
+<p id = "note"></p>
+<p id = "rooms"></p>
     </div>
 
+      <script>
+      var button_generate = document.getElementById("generate_button");
+      var button_submit = document.getElementById("submit_button");
+      var submitted = document.getElementById("submitted_prompt");
+      var rooms = document.getElementById("rooms");
+      var note = document.getElementById("note");
+      //code to get subcolumnPerColumn from edit in navbar page
+      var subcolumnPerColumn = [2, 1, 2];
+      var tempsublist = subcolumnPerColumn;
+      var temp = "<?php 
+        echo "<pre>";
+        //code to get subcolumnPerColumn from edit in navbar page or to get from js variable idk
+        $templist = [2, 1, 2];
+        foreach(array_keys($h) as $session){
+          foreach(array_keys($h[$session]) as $room){
+            echo "<div style=' border:1px solid black;margin:10px; padding: 20px;'>";
+            echo "<br><h3>";  
+            print "Date and Session: ";
+            print($session);
+            echo "<br>";
+            print "Room: ";
+            print($room);
+            echo "</h3><br>";
+            echo "<br>";
+            echo "<div style=' padding: 20px; margin:10px;' class='row'>";
+            foreach(array_keys($h[$session][$room]) as $subcols){
+              echo "<div class='col' style='border:1px solid black;padding: 20px;' >";
+              print "Sub Column: ";
+              print($subcols + 1);
+              echo "<br>";  
+              foreach(array_keys($h[$session][$room][$subcols]) as $stud){
+                print "   ";
+                echo "<br>";  
+                if ($h[$session][$room][$subcols][$stud] != null){
+                  echo "<div class='' style=' border:1px solid black; ' draggable = 'true'>";
+                }
+                else{
+                  echo "<div>";
+                }
+                  print($h[$session][$room][$subcols][$stud]);
+                  echo "</div>";
+              }
+              echo "</div>";
+            }
+            echo "</div></div>";
+        } 
+        echo "<br>";  
+      }
+        ?>";
+      
+      button_submit.onclick = function(){
+        rooms.innerHTML="";
+        submitted.innerHTML = "<em>Your file has been submitted. Click Generate seating button to generate the seating allocation.</em>";
+      };
+
+      button_generate.onclick = function(){
+        submitted.innerHTML = "";
+        rooms.innerHTML = temp;
+        note.innerHTML = "<em>Note that the number of subcolumns belonging to each column is " + subcolumnPerColumn + " respectively, as divided by the borders.<br>(Refer picture in the Edit option in the navigation bar for clarity on terms such as subcolumns)</em>";
+      };
+
+      </script>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

@@ -282,5 +282,6 @@
             }
             // echo "<pre>";
             // print_r($MEGAMEGALIST);
+            return $MEGAMEGALIST;
         }
     }
