@@ -4,7 +4,7 @@ STAFF DETAILS
 
 
 CREATE TABLE `staff_details` (
- `ID` int(10) NOT NULL,
+ `ID` int(10) NOT NULL AUTO_INCREMENT,
  `StaffName` char(25) NOT NULL,
  `Designation` char(25) NOT NULL,
  `EmailAddress` varchar(50) NOT NULL,
