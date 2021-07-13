@@ -284,4 +284,122 @@
             // print_r($MEGAMEGALIST);
             return $MEGAMEGALIST;
         }
+    // staff duty allocation start
+        function dutyAllocation(){
+            $this->load->database();
+            $roomArray = $this->starter->seating();
+           
+            $staffAlloc = (array) null;
+            $totalDuties = 0;
+            //room invigilation duty
+            foreach (array_keys($roomArray) as $session) {
+                foreach (array_keys($roomArray[$session]) as $room){
+                    $totalDuties++;
+                }
+            }
+            //+ no of relieving duties
+            $totalDuties = $totalDuties + ceil($totalDuties / 5) ;
+            $relievingDuty = ceil($totalDuties / 5);
+            // print($totalDuties);
+            $totalStaff = $this->db->query('select * from staff_details');
+            $totalStaff = count($totalStaff->result_array());
+
+            $countAssistantProf = $this->db->query('select * from staff_details where designation ="Assistant Prof"');
+            $countAssistantProf = count($countAssistantProf->result_array());
+            // print($countAssistantProf);
+            $countAssociateProf = $this->db->query('select * from staff_details where designation ="Associate Prof"'); 
+            $countAssociateProf = count($countAssociateProf->result_array());
+            // print($countAssociateProf);
+            $noOfDutyPerPerson = $totalDuties / $totalStaff;
+            // $noOfDutyPerPerson = $totalDuties / 12;
+            // print($noOfDutyPerPerson);
+
+            if(ceil($noOfDutyPerPerson) <= $noOfDutyPerPerson){
+                $staffAlloc = $this->starter->allocateForBoth($roomArray,$noOfDutyPerPerson,$totalDuties,$relievingDuty);
+            }
+            else{
+                $staffAlloc = $this->starter->allocateByDivision($roomArray,$noOfDutyPerPerson,$totalDuties,$relievingDuty);
+            } 
+            // echo '<pre>';
+            // print_r($staffAlloc);  
+            return $staffAlloc;
+
+        }
+//staff duty allocation end
+        function allocateForBoth($roomArray,$noOfDutyPerPerson,$totalDuties){
+            // $this->load->database();
+            $result_array = (array) null;
+            $DutyAssigned = (array) null; //future reference
+            $Professors = $this->db->query('select staffname,emailaddress from staff_details order by designation');
+            // echo '<pre>';
+            // print_r($assistantProfessor->result_array());
+            $cnt = 0;
+            $i=0;
+            $totalTaken = 0;
+            
+            foreach (array_keys($roomArray) as $session) {
+                foreach (array_keys($roomArray[$session]) as $room){
+                    if($cnt != ceil($noOfDutyPerPerson) && $noOfDutyPerPerson >= $totalTaken){
+                        $result_array[$session][$room] = $Professors->result_array()[$i];
+                        $cnt++;
+                    }
+                    else{
+                        $i++;
+                        $result_array[$session][$room] = $Professors->result_array()[$i];
+                        $cnt = 1;
+                    }
+                    $totalTaken++;
+
+                    $DutyAssigned[$i]++;
+                    // echo $session." ".$room."<br>";
+                }
+            }
+            return $result_array;
+            // echo "<pre>";
+            // print_r($result_array);
+        }
+
+        function allocateByDivision($roomArray,$noOfDutyPerPerson,$totalDuties){
+            $result_array = (array) null;
+            $DutyAssigned = (array) null;
+            $Professors = $this->db->query('select staffname,emailaddress from staff_details order by designation');
+            $countProf = count($Professors->result_array());
+            $tempDuty = floor($totalDuties / $countProf);
+            $remainDuty = $totalDuties % $countProf;
+            $commonDuty = $totalDuties - ($totalDuties % $countProf);
+            $Duty = $commonDuty;
+            $count = 0;
+            $cnt =0;
+            $i = 0;
+            foreach (array_keys($roomArray) as $session) {
+                foreach (array_keys($roomArray[$session]) as $room){
+                    if($Duty > 0){
+                        if($cnt != $tempDuty){
+                            $result_array[$session][$room] = $Professors->result_array()[$i];
+                            $cnt++;
+                        }
+                        else{
+                            $i++;
+                            $result_array[$session][$room] = $Professors->result_array()[$i];
+                            $cnt = 1;
+                        }
+                        $DutyAssigned[$i] = $cnt;
+                        $Duty--;
+                    }
+                    else{
+                        $i = 0;
+                        if($remainDuty > 0){
+                            $result_array[$session][$room] = $Professors->result_array()[$i];
+                            $DutyAssigned[$i]++;
+                        }
+                        $i++;
+                    }
+                }
+            }
+            return $result_array;
+            // echo "<pre>";
+            // print_r($result_array);
+            // print_r($DutyAssigned);
+        }
+    
     }

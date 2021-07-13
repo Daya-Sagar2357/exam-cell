@@ -10,11 +10,13 @@ class Get_started extends CI_Controller{
         $this->load->model('starter');
         $data['h']=$this->starter->seating();
         // echo $data;
+        //change by greeshma
+        $staffObject['staff']=$this->starter->dutyAllocation();
+
         $this->load->view('pages/allocate', $data);
         // $this->load->view('pages/'.$page, $data);
         $this->load->view('templates/footer', $temp_data);
     }
-
     public function allocate(){
         echo "inside function allocate";
     }
@@ -23,7 +25,6 @@ class Get_started extends CI_Controller{
         $temp_data['title'] = ucfirst($page);
         $this->load->view('templates/header', $temp_data);
         $this->load->view('pages/edit');
-        
         $this->load->view('templates/footer', $temp_data);
 
     }
