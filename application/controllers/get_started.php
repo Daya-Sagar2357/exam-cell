@@ -44,10 +44,6 @@ class Get_started extends CI_Controller{
 
         $this->load->view('pages/seatingarrangement',$data);
     }
-    public function questionpaper($page = 'home'){
-         $this->load->view('pages/questionpaper');
-    
-    }
      public function SeatingPlan($page = 'home'){
          $this->load->model('starter');
         $data['h']=$this->starter->seating();
