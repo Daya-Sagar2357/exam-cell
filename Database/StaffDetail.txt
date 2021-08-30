@@ -1,0 +1,30 @@
+
+STAFF DETAILS
+===============================================
+
+
+CREATE TABLE `staff_details` (
+ `ID` int(10) NOT NULL AUTO_INCREMENT,
+ `StaffName` char(25) NOT NULL,
+ `Designation` char(25) NOT NULL,
+ `EmailAddress` varchar(50) NOT NULL,
+ `AssignedDuties` int(11) NOT NULL,
+ `DutiesTaken` int(11) NOT NULL,
+ PRIMARY KEY (`ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+
+
+
+
+INSERT INTO `staff_details` (`ID`, `StaffName`, `Designation`, `EmailAddress`, `AssignedDuties`, `DutiesTaken`) VALUES ('1', 'Balachandran Nair', 'Associate Prof', 'bal@123.com', '0', '0');
+INSERT INTO `staff_details` (`ID`, `StaffName`, `Designation`, `EmailAddress`, `AssignedDuties`, `DutiesTaken`) VALUES ('2', 'Sumithra', 'Assistant Prof', 'sumi@123.com', '0', '0');
+INSERT INTO `staff_details` (`ID`, `StaffName`, `Designation`, `EmailAddress`, `AssignedDuties`, `DutiesTaken`) VALUES ('3', 'Sujatha', 'Associate Prof', 'suji@123.com', '0', '0');
+INSERT INTO `staff_details` (`ID`, `StaffName`, `Designation`, `EmailAddress`, `AssignedDuties`, `DutiesTaken`) VALUES ('4', 'Suresh', 'Assistant Prof', 'suresh@123.com', '0', '0');
+INSERT INTO `staff_details` (`ID`, `StaffName`, `Designation`, `EmailAddress`, `AssignedDuties`, `DutiesTaken`) VALUES ('5', 'Kannan', 'Assistant Prof', 'kan@123.com', '0', '0');
+INSERT INTO `staff_details` (`ID`, `StaffName`, `Designation`, `EmailAddress`, `AssignedDuties`, `DutiesTaken`) VALUES ('6', 'Sumimol', 'Assistant Prof', 'sumimol@123.com', '0', '0');
+INSERT INTO `staff_details` (`ID`, `StaffName`, `Designation`, `EmailAddress`, `AssignedDuties`, `DutiesTaken`) VALUES ('7', 'Narasimhan', 'Assistant Prof', 'nara@123.com', '0', '0');
+INSERT INTO `staff_details` (`ID`, `StaffName`, `Designation`, `EmailAddress`, `AssignedDuties`, `DutiesTaken`) VALUES ('8', 'Smitha', 'Assistant Prof', 'smitha@123.com', '0', '0');
+INSERT INTO `staff_details` (`ID`, `StaffName`, `Designation`, `EmailAddress`, `AssignedDuties`, `DutiesTaken`) VALUES ('9', 'Devi', 'Assistant Prof', 'devi@123.com', '0', '0');
+INSERT INTO `staff_details` (`ID`, `StaffName`, `Designation`, `EmailAddress`, `AssignedDuties`, `DutiesTaken`) VALUES ('10', 'Siji', 'Assistant Prof', 'siji@123.com', '0', '0');
+INSERT INTO `staff_details` (`ID`, `StaffName`, `Designation`, `EmailAddress`, `AssignedDuties`, `DutiesTaken`) VALUES ('11', 'Kumaran', 'Assistant Prof', 'kum@123.com', '0', '0');
+INSERT INTO `staff_details` (`ID`, `StaffName`, `Designation`, `EmailAddress`, `AssignedDuties`, `DutiesTaken`) VALUES ('12', 'Raman', 'Assistant Prof', 'ram@123.com', '0', '0');

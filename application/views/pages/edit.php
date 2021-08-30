@@ -12,7 +12,6 @@
 
 <img src="<?php echo base_url();?>img/seating_sample.png" class="img-fluid" alt="Responsive image">
 
-    <div class="card" style="width: 100%;height: auto;object-fit: cover; margin-top: 25px;">
   <div class="card-body">
   <h4 class="card-title">Seating sample</h4>
     <p class="card-text">The default arrangement is such that there are three columns, each containing 7+7, 6, and 7+7 (sub-columns) students each, where 20 of them (7, 6, 7) will be writing one subject, and 14 (7, 7), another subject.</p>

@@ -38,6 +38,28 @@
 <p id = "rooms"></p>
     </div>
 
+<h1 class = 'container'>
+    Staff Allocation
+  </h1>
+    <div class='container pt-3'>
+   
+    <div class='row'>
+  <form method="post">
+    <div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <span class="input-group-text">Upload</span>
+    </div>
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="inputGroupFile01">
+        <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+    </div>
+    </div>
+    <button id="submit_button" type="button" class="btn btn-primary">Submit</button>
+     <button id="generate_button" type="button" class="btn btn-primary">Generate</button>
+        
+  </form>
+</div>
+
       <script>
       var button_generate = document.getElementById("generate_button");
       var button_submit = document.getElementById("submit_button");
