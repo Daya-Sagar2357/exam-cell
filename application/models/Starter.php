@@ -320,8 +320,8 @@
             else{
                 $staffAlloc = $this->starter->allocateByDivision($roomArray,$noOfDutyPerPerson,$totalDuties,$relievingDuty);
             } 
-            // echo '<pre>';
-            // print_r($staffAlloc);  
+           // echo '<pre>';
+            //print_r($staffAlloc);  
             return $staffAlloc;
 
         }
@@ -401,5 +401,11 @@
             // print_r($result_array);
             // print_r($DutyAssigned);
         }
+          function data(){
+            $this->load->database();
+            $branch= $this->db->query('select distinct BranchName from semester_masterlist');
+            $b=$branch->result_array();
+            return $b;
+    }
     
     }
