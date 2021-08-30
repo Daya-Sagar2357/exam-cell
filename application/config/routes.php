@@ -51,3 +51,5 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['default_controller'] = 'get_started/view';
 $route['(:any)'] = 'get_started/view/$1';
+$route['profiler'] = "Profiler_controller"; 
+$route['profiler/disable'] = "Profiler_controller/disable";
