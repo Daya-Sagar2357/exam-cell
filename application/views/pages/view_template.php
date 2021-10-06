@@ -5,6 +5,7 @@
     <title></title>
 </head>
 <body>
+<div class='container pt-3'>
 <form method="" action="seatingarrangement">
     <button>SEATING ARRANGEMENT</button>
 </form>
@@ -14,7 +15,7 @@
 <button>QUESTION PAPER OPENING FORM</button></form>
 <form method="" action="invigilationduty">
 <button>INVIGILATION DUTY</button></form>
-
+</div>
 <br>
 </body>
 </html>

@@ -21,7 +21,7 @@
                         padding: 10px 10px 0px 10px;
                         bottom: 0;
                         width: 100%;
-                        height: 40px;
+                        height: 20px;
                 }
         </style>
                 <br>
