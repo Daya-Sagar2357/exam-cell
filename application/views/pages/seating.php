@@ -3,36 +3,23 @@
 
 <pre>
 <div style='margin-left:30px;'><h2 class='container'>Generated Seating</h2>
+<p>(Scroll down way below to get a more intuitive idea of the generated seating)</p>
 
 <div class="example-parent">
   <div class="example-origin" id="draggables">
   </div>
-
-  <!-- <div
-    class="example-dropzone"
-    id="droppables"
-  >
-  </div> -->
 </div>
 
 <?php
 
-    // foreach(array_keys($h) as $session){
-    //   foreach(array_keys($h[$session]) as $room){
-    //     foreach(array_keys($h[$session][$room]) as $subcols){
-    //       foreach(array_keys($h[$session][$room][$subcols]) as $stud){
-    //           echo "<div>";
-    //           print($h[$session][$room][$subcols][$stud]);
-    //           echo "</div>";
-    //       }
-    //       echo "<br>";
-    //     }
-    //   }    
-    // }
-
+    echo "<h1>Before editing:</h1>";
+    echo "(Here, 'Sub Column' is the Rows 0 to 4 mentioned above)";
+    //haven't added 'after editing:' to UI, use js_array_final if needed, for the same.
+    //'before editing' was used more or less to get the IDs using getElementById("reg_no") for doing the js stuff
+    //refer to that part in the UI (scroll wayyy down) to see get a clearer picture of what exactly will be edited while dragging and dropping the individual reg nos.
   foreach(array_keys($h) as $session){
     foreach(array_keys($h[$session]) as $room){
-      echo "<div style='border:1px solid black;margin:30px; padding: 20px;'> <br><h3>";
+      echo "<div name='whole' style='border:1px solid black;margin:30px; padding: 20px;'> <br><h3>";
       print "Room: ";
       print($room);
       echo "<br>";
@@ -65,7 +52,9 @@
 
 ?>
 
+
 <script>
+//script to enable drag and drop edit through UI to the generated seating
 
 var colPerClass = 0;
 var js_array = <?php echo json_encode($h); ?>;
@@ -80,6 +69,11 @@ var colLengths =new Array();
 var tempAllStud = new Array();
 var totalColumnCount = 0;
 var totStudCount = 0;
+
+//tempAllStud is created to further create tempArray, which is an array of arrays, with each inner array being columns of students
+//like ['LBT20CS020', 'LBT20CS021', 'LBT20CS022', 'LBT20CS023', 'LBT20CS024', 'LBT20CS025', 'LBT20CS026'],
+// ['LBT20EC020', 'LBT20EC021', 'LBT20EC022', 'LBT20EC023', 'LBT20EC024', 'LBT20EC025', 'LBT20EC026'] and so on, without any other information like session, room etc, for ease of enabling dynamic drag and drop through UI.
+//this tempArray is later mapped to js_final_array after each drag and drop in the UI
   Object.entries(js_array).forEach(([sess, room]) => {
       Object.entries(room).forEach(([room, col]) => {
           // console.log(col);
@@ -114,7 +108,6 @@ let temp = [];
 let column1 = document.getElementsByName('reg_no');
 var iterator = column1.values();
 for (let elements of iterator) {
-  // console.log(elements.innerHTML);
   temp.push(elements.innerHTML);
 }
 column1 = temp;
@@ -122,22 +115,45 @@ column1 = temp;
 let column2 = [];
 
 const draggables = document.getElementById('draggables');
-// const droppables = document.getElementById('droppables');
 
 function clear() {
   draggables.innerHTML = "";
-  // droppables.innerHTML = "";
 }
 
 let colId = 0;
 function render() {
 
-  //add code to convert tempArray back to megalist format $h[$session][$room][$subcols][$stud]
+//check out the seating_sample.png in img folder for a better idea on what "sub-columns" in UI means
+//each array in the final array as well as tempArray is each sub-column. The word "row" is used in the UI (in the drag and drop part alone) in place of sub-column for clarity
 
 var tempCount = 0;
 var dropzoneId = [];
 let k=0;
+let b = 0;
+
+var sessAndRoom = new Array();
+for(var x in js_array){
+  for(var y in js_array[x]){
+      sessAndRoom.push(x.toString().concat("  "+y.toString()))
+  }
+}
+
+    let ii = 0;
 for(let i = 0 ; i < totalColumnCount ; i ++ ){
+  let br = document.createElement("div");
+  br.innerHTML = "<h4>Row " + b+"</h4>";
+  if(b===0){
+    let div2 = document.createElement("div");
+    div2.innerHTML = "<h2> "+sessAndRoom[ii]+"</h2>";
+    ii+=1;
+    draggables.appendChild(div2);
+  }
+  if(colPerClass===b+1) {
+    b = 0;
+  }
+  else b+=1;
+  draggables.appendChild(br);
+
   //add them into colPerClass number of columns
   draggables.appendChild(createDropzone(k, 0, colId));
   k+=1;
@@ -156,8 +172,10 @@ for(let i = 0 ; i < totalColumnCount ; i ++ ){
     div.setAttribute("class", "dropped-item");
     draggables.appendChild(createDropzone(i,idx+1));
   });
-  let br = document.createElement("br");
-  draggables.appendChild(br);
+  
+  let br2 = document.createElement("br");
+  draggables.appendChild(br2);
+
   tempCount += 1;
   if (tempCount == colPerClass){
     //break into new set of columns
@@ -170,7 +188,7 @@ for(let i = 0 ; i < totalColumnCount ; i ++ ){
 
 function createDropzone(i,idx) {
   let dropzone = document.createElement("div");
-  dropzone.innerHTML=i.toString()+" "+idx.toString();
+  // dropzone.innerHTML=i.toString()+" "+idx.toString();
   dropzone.setAttribute("class", "dropzone");
   dropzone.setAttribute("style", "background-color:#e2f2bd")
   dropzone.setAttribute("id",i.toString()+" "+idx.toString());
@@ -237,7 +255,24 @@ function handleDrop(event, i,idx) {
   render();
 
 //code to map tempArray to megalist format to json decode back to php array
+let js_array_final = {};
 
+js_array_final = js_array;
+
+let m = 0;
+for(var x in js_array){
+  for(var y in js_array[x]){
+      for(var z in js_array[x][y]){
+      js_array_final[x][y][z] = tempArray[m];
+      m+=1;
+      }
+  }
+}
+console.log(js_array_final);
+
+//use this js_array_final to pass to other functions like doc generation, staff allocation etc.
+//js_final_array is the final seating at any point in time, including mid-change in UI through drag and drop
+//json decode back to php array if necessary
 
 }
 

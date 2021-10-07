@@ -1,5 +1,10 @@
 <?php
 
+
+//below code is the actual seating algorithm
+//could use a ton of optimization in terms of repeated code etc.
+//might be better if the whole thing is modularized into separate functions if possible
+
     class Starter extends CI_Model{
 
         function seating(){
@@ -280,10 +285,26 @@
                     $this->db->query('drop temporary table temptab');
                 }
             }
-            // echo "<pre>";
-            // print_r($MEGAMEGALIST);
+        
+
+            //this is the final allocated seating. 
+            //this is passed through to the editing through drag and drop functionality coded in views/pages/seating.php
             return $MEGAMEGALIST;
         }
+
+
+
+
+
+
+
+
+
+//anything below this doesn't work. Or at least is questionable.
+
+
+
+
     // staff duty allocation start
         function dutyAllocation(){
             $this->load->database();

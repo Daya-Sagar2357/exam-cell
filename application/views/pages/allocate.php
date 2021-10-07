@@ -72,7 +72,7 @@
       
       button_submit.onclick = function(){
         rooms.innerHTML="";
-        submitted.innerHTML = "<em>Your file has been submitted. Click Generate seating button to generate the seating allocation.</em>";
+        submitted.innerHTML = "<em>(((This code doesn't work yet :/ )))Your file has been submitted. Click Generate seating button to generate the seating allocation.</em>";
       };
 
 

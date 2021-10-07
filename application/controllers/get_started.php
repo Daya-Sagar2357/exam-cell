@@ -7,10 +7,11 @@ class Get_started extends CI_Controller{
         $this->load->view('templates/header', $temp_data);
         // $this->load->view('pages/'.$page, $data);
         $db_obj = $this->load->database();
+        //seating allocation code is in starter mentioned below
         $this->load->model('starter');
         $data['h']=$this->starter->seating();
         // echo $data;
-        //change by greeshma
+        //change by greeshma //doesn't work
         // $staffObject['staff']=$this->starter->dutyAllocation();
 
         $this->load->view('pages/allocate', $data);
