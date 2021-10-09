@@ -1,0 +1,7 @@
+As for the image in this folder, it aims to give some clarity on the terms sub-columns, rows etc. For additional clarity:
+In "Before editing:" UI where the generated seating is displayed, sub-columns are the vertical columns of students seated. By default
+the number of such columns are five. The *five* sub-columns that are in use would irl be three columns of benches and desks, 
+left, middle and right, where left and right would have two subcolumns each and the middle would just have one. The left and right 
+columns also have capacity to seat 7 people in each subcolumn as opposed to the middle row which can only seat 6. This would 
+total a capacity of 7+7+6+7+7= 34 students per class.
+Again, refer the image to get more clarity on terms columns and sub-columns. Also, add the image to the UI for the user's ease.

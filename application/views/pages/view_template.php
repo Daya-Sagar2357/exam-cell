@@ -5,6 +5,8 @@
     <title></title>
 </head>
 <body>
+    <!-- This entire module takes the generated seating from started.php model. Instead they should be edited 
+to read from views/pages/seating.php, the final js variable js_array_final. -->
 <div class='container pt-3'>
 <form method="" action="seatingarrangement">
     <button>SEATING ARRANGEMENT</button>

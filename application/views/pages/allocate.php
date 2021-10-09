@@ -38,6 +38,9 @@
 <p id = "rooms"></p>
     </div>
 
+
+    <!-- Staff allocation module: doesn't work/erroneous, hence commented out everywhere-->
+<!-- 
 <h1 class = 'container'>
     Staff Allocation
   </h1>
@@ -58,7 +61,7 @@
      <button id="generate_button" type="button" class="btn btn-primary">Generate</button>
         
   </form>
-</div>
+</div> -->
 
       <script>
       var button_generate = document.getElementById("generate_button");

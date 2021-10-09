@@ -124,7 +124,7 @@ let colId = 0;
 function render() {
 
 //check out the seating_sample.png in img folder for a better idea on what "sub-columns" in UI means
-//each array in the final array as well as tempArray is each sub-column. The word "row" is used in the UI (in the drag and drop part alone) in place of sub-column for clarity
+//each array in the final array, as well as in the tempArray, is 'sub-columns'.
 
 var tempCount = 0;
 var dropzoneId = [];
@@ -141,7 +141,7 @@ for(var x in js_array){
     let ii = 0;
 for(let i = 0 ; i < totalColumnCount ; i ++ ){
   let br = document.createElement("div");
-  br.innerHTML = "<h4>Row " + b+"</h4>";
+  br.innerHTML = "<h4>Sub-column: " + b+"</h4>";
   if(b===0){
     let div2 = document.createElement("div");
     div2.innerHTML = "<h2> "+sessAndRoom[ii]+"</h2>";
